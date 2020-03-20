@@ -6,6 +6,7 @@
 	<modules>
 		<module>work</module>
 		<module>newtask</module>
+		<module>work2</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
