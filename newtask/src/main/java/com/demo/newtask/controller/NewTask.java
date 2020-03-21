@@ -34,7 +34,7 @@ public class NewTask {
             System.out.println(" [x] Sent '" + message + "'");
         }
 
-        return "success!";
+        return "success! NewTask";
 
     }
 
