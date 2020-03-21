@@ -21,6 +21,8 @@ public class EmitLog {
             channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
 
             String[] argv = NewTaskApplication.str;
+//            String[] argv = {"First", "Second", "Third", "Fourth", "Fourth", "Fifth"};
+
             String message = argv.length < 1 ? "info: Hello World!" :
                     String.join(" ", argv);
 
