@@ -1,4 +1,4 @@
-package com.demo.work.controller;
+package com.demo.work2.controller;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ReceiveLogsTopic {
+public class ReceiveLogsTopic2 {
 
     private static final String EXCHANGE_NAME = "topic_logs";
 
-    @RequestMapping("/ReceiveLogsTopic")
+    @RequestMapping("/ReceiveLogsTopic2")
     public String index() throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
@@ -22,7 +22,7 @@ public class ReceiveLogsTopic {
         channel.exchangeDeclare(EXCHANGE_NAME, "topic");
         String queueName = channel.queueDeclare().getQueue();
 
-        String[] argv = {"kern.*", "*.critical"};
+        String[] argv = {"kern2.*", "*.critical2"};
         if (argv.length < 1) {
             System.err.println("Usage: ReceiveLogsTopic [binding_key]...");
             System.exit(1);
@@ -41,7 +41,6 @@ public class ReceiveLogsTopic {
         channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
         });
 
-        return "ReceiveLogsTopic !";
+        return "ReceiveLogsTopic2 !";
     }
 }
-

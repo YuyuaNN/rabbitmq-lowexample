@@ -3,12 +3,16 @@ package com.demo.newtask.controller;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class EmitLogTopic {
 
     private static final String EXCHANGE_NAME = "topic_logs";
 
-    public static void main(String[] argv) throws Exception {
+    @RequestMapping("/EmitLogTopic")
+    String index() throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         try (Connection connection = factory.newConnection();
@@ -16,12 +20,15 @@ public class EmitLogTopic {
 
             channel.exchangeDeclare(EXCHANGE_NAME, "topic");
 
+            String[] argv = {"kern.critical", "A critical kernel error"};
             String routingKey = getRouting(argv);
             String message = getMessage(argv);
 
             channel.basicPublish(EXCHANGE_NAME, routingKey, null, message.getBytes("UTF-8"));
             System.out.println(" [x] Sent '" + routingKey + "':'" + message + "'");
         }
+
+        return "EmitLogTopic !";
     }
 
     private static String getRouting(String[] strings) {
